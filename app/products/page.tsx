@@ -8,16 +8,19 @@ const page = () => {
   const products = getAllProduct();
 
   return (
-    <>
+    <Suspense fallback={<>I am loading....</>}>
+      <div>none styling</div>
       <PageTitle>商品列表</PageTitle>
-      <ProductGallery>
-        {products.map((product: any) => (
-          <Suspense fallback={<>I am Loading.</>} key={product.id}>
-            <ProductCard product={product} key={product.id} />
-          </Suspense>
-        ))}
-      </ProductGallery>
-    </>
+      {/* <ProductGallery>
+
+          {products.map((product: any) => (
+            <Suspense fallback={<>I am Loading.</>} key={product.id}>
+              <ProductCard product={product} key={product.id} />
+            </Suspense>
+          ))}
+
+      </ProductGallery> */}
+    </Suspense>
   );
 };
 
