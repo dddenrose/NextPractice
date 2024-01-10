@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 import styled, { css } from "styled-components";
 
 export const Product = styled.div`
