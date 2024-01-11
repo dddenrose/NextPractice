@@ -7,13 +7,7 @@ const nextConfig = {
     appDir: true,
   },
   compiler: {
-    styledComponents: {
-      ssr: true,
-    },
-  },
-  babel: {
-    presets: ["next/babel"],
-    plugins: [["styled-components", { ssr: true }]],
+    styledComponents: true,
   },
 };
 
