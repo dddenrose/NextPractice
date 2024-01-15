@@ -2,6 +2,7 @@
 import React from "react";
 import * as style from "./style";
 import { Table } from "antd";
+import { getAllPost } from "@/app/api/usePost";
 
 const BlogPost = (props: any) => {
   const { postList } = props;
@@ -18,6 +19,14 @@ const BlogPost = (props: any) => {
       key: "body",
     },
   ];
+
+  React.useEffect(() => {
+    const init = async () => {
+      const data = await getAllPost();
+    };
+
+    init();
+  }, []);
 
   return <Table columns={columns} dataSource={postList} rowKey={"id"} />;
 };

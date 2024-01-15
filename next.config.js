@@ -3,9 +3,6 @@ const nextConfig = {
   images: {
     domains: ["fakestoreapi.com"],
   },
-  experimental: {
-    appDir: true,
-  },
   compiler: {
     styledComponents: true,
   },
