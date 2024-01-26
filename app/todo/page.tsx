@@ -1,15 +1,17 @@
 "use client";
 import React from "react";
-import { Table } from "antd";
+import { Skeleton, Table } from "antd";
 import { useRouter } from "next/navigation";
 import TodoDetailModal from "./components/TodoDetailModal";
-import { useCertainTodo } from "../api/useTodo";
+import RegularButton from "@/components/RegularButton/RegularButton";
+import CustomButton from "@/components/CustomButton/CustomButton";
 
 const Todo = () => {
   const router = useRouter();
   const [tableData, setTableData] = React.useState([]);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [todoData, setTodoData] = React.useState({});
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const handleDetailModalOpen = async (id: number) => {
     const result = await fetch(
@@ -21,7 +23,7 @@ const Todo = () => {
   };
 
   const columns = [
-    { title: "ID", dataIndex: "id" },
+    { title: "Index", dataIndex: "id" },
     { title: "Title", dataIndex: "title" },
     {
       title: "Action",
@@ -39,25 +41,30 @@ const Todo = () => {
 
   React.useEffect(() => {
     const init = async () => {
+      setIsLoading(true);
       const { data } = await fetch("/api/todo").then((res) => res.json());
-
-      setTableData(data);
+      setTableData(data || []);
+      setIsLoading(false);
     };
 
     init();
   }, []);
 
-  return (
-    <div>
-      I am a todo page.
+  return isLoading ? (
+    <Skeleton active />
+  ) : (
+    <>
       <TodoDetailModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         todoData={todoData}
         setTodoData={setTodoData}
       />
+      
       <Table columns={columns} dataSource={tableData || []} rowKey={"id"} />
-    </div>
+      <CustomButton />
+      <RegularButton />
+    </>
   );
 };
 
