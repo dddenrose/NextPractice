@@ -5,7 +5,6 @@ import { Button, Modal } from "antd";
 import { useRouter, useParams } from "next/navigation";
 
 const TodoDetail = (props: any) => {
-  const { isModalOpen, setIsModalOpen } = props;
   const params = useParams();
   const router = useRouter();
   const [todoData, setTodoData] = React.useState<any>({});
@@ -24,11 +23,21 @@ const TodoDetail = (props: any) => {
     init();
   }, [params.id]);
 
+  const handlePost = async () => {
+    const success = await fetch(`/api/todo/${params.id}`, {
+      method: "POST",
+      body: JSON.stringify({ title: "test" }),
+    });
+
+    console.log(success, "===success");
+  };
+
   return (
     <div>
       <Button onClick={() => router.back()}>Back</Button>
       <div>Todo id: {todoData?.id}</div>
       <div>Todo title: {todoData?.title}</div>
+      <Button onClick={handlePost}>Test Post</Button>
     </div>
   );
 };
