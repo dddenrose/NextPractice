@@ -42,6 +42,9 @@ export const Page: any = async () => {
       <Link href={"/todo"}>
         <h4>👉 Album</h4>
       </Link>
+      <Link href={"/globalClock"}>
+        <h4>👉 Global Clock</h4>
+      </Link>
       <div style={{ color: "grey" }}>Some Data From Api : {data}</div>
     </div>
   );
