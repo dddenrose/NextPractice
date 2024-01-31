@@ -45,6 +45,10 @@ export default function RootLayout(props: {
                       key: "Blogger",
                       label: <Link href={"/blogger"}>Blogger</Link>,
                     },
+                    {
+                      key: "globalClock",
+                      label: <Link href={"/globalClock"}>Global Clock</Link>,
+                    },
                   ]}
                   style={{ flex: 1, minWidth: 0 }}
                 />
