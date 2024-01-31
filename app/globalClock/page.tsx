@@ -10,13 +10,18 @@ interface TimeReponse {
 const GlobalClock = async () => {
   const getData = async () => {
     try {
-      const data = await fetch(
-        "https://worldtimeapi.org/api/timezone/Asia/Taipei",
-        { next: { revalidate: 5 } }
-      ).then((response) => response.json());
+      const temp: TimeReponse = await new Promise(async (resolve) => {
+        const data = await fetch(
+          "https://worldtimeapi.org/api/timezone/Asia/Taipei",
+          { cache: "no-cache" }
+        ).then((response) => response.json());
 
-      console.log(data, "data");
-      return data;
+        setTimeout(() => {
+          resolve(data);
+        }, 2000);
+      });
+
+      return temp;
     } catch (err) {
       console.log(err, "===err");
     } finally {
