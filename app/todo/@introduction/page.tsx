@@ -1,6 +1,6 @@
 import React from "react";
 import type { CollapseProps } from "antd";
-import { Collapse } from "antd";
+import { Button, Collapse, Modal } from "antd";
 import * as Style from "./style";
 
 const text = `
@@ -35,13 +35,17 @@ const Introduction: React.FC = async () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(text);
-      }, 4000);
+      }, 1000);
     });
   };
 
-  const data: any = await fakeLoading().then((res) => res);
+  // const data: any = await fakeLoading().then((res) => res);
 
-  return <>This Is Introduction Block 🔖</>;
+  return (
+    <div>
+      <h1>To Do List ( large data loading )</h1>
+    </div>
+  );
 };
 
 export default Introduction;
