@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic"; // defaults to auto
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   const res = await fetch(`https://jsonplaceholder.typicode.com/todos`, {

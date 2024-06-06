@@ -1,6 +1,12 @@
 "use client";
 import React from "react";
-import { Skeleton, Table as AntdTable } from "antd";
+import {
+  Skeleton,
+  Table as AntdTable,
+  Button,
+  Dropdown,
+  MenuProps,
+} from "antd";
 import { useRouter } from "next/navigation";
 // import TodoDetailModal from "../components/TodoDetailModal";
 
@@ -21,27 +27,40 @@ const Table = (props: any) => {
     setIsModalOpen(true);
   };
 
+  const formatItems = (record: any) => {
+    const items: MenuProps["items"] = [
+      {
+        key: "1",
+        label: (
+          <Button
+            type="text"
+            onClick={() => {
+              router.push(`/todo/${record.id}`);
+            }}
+          >
+            Detail
+          </Button>
+        ),
+      },
+    ];
+
+    return items;
+  };
+
   const columns = [
     { title: "Index", dataIndex: "id" },
     { title: "Title", dataIndex: "title" },
-    // {
-    //   title: "Action",
-    //   dataIndex: "",
-    //   key: "x",
-    //   render: (record: any) => (
-    //     <>
-    //       <a onClick={() => router.push(`/todo/${record.id}`)}>Detail</a>
-    //       <br />
-    //       <a onClick={() => handleDetailModalOpen(record?.id)}>DetailModal</a>
-    //     </>
-    //   ),
-    // },
+    {
+      title: "Action",
+      dataIndex: "",
+      key: "Action",
+      render: (record: any) => (
+        <Dropdown menu={{ items: formatItems(record) }}>
+          <a onClick={(e) => e.preventDefault()}>Hover me</a>
+        </Dropdown>
+      ),
+    },
   ];
-
-  //   const { data } = await fetch("http://localhost:3000/api/todo").then((res) =>
-  //     res.json()
-  //   );
-
   return (
     <>
       {/* <TodoDetailModal
@@ -57,7 +76,7 @@ const Table = (props: any) => {
         rowKey="id"
         bordered
         size="small"
-        pagination={{ pageSize: 100, showSizeChanger: false}}
+        pagination={{ pageSize: 100, showSizeChanger: false }}
       />
     </>
   );
