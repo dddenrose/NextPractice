@@ -49,6 +49,16 @@ export default function RootLayout(props: {
                       key: "globalClock",
                       label: <Link href={"/globalClock"}>Global Clock</Link>,
                     },
+                    {
+                      key: "gallery",
+                      label: <Link href={"/gallery"}>Gallery</Link>,
+                    },
+                    {
+                      key: "galleryClient",
+                      label: (
+                        <Link href={"/galleryClient"}>Gallery Client</Link>
+                      ),
+                    },
                   ]}
                   style={{ flex: 1, minWidth: 0 }}
                 />
